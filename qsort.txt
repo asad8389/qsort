@@ -1,0 +1,41 @@
+void qsort (void* base, size_t num, size_t size,
+            int (*comparator)(const void*,const void*));
+
+
+            base= base address of array
+            size_t num= size of array
+            size_t size= size of 0 element of array
+
+
+            int comparator(const void* p1, const void* p2);
+            Return value meaning
+            <0 The element pointed by p1 goes before the element pointed by p2
+            0  The element pointed by p1 is equivalent to the element pointed by p2
+            >0 The element pointed by p1 goes after the element pointed by p2
+
+
+
+
+
+
+            int comparator(const void *p, const void *q)
+{
+    // Get the values at given addresses
+    int l = *(const int *)p;
+    int r = *(const int *)q;
+
+    // both odd, put the greater of two first.
+    if ((l&1) && (r&1))
+        return (r-l);
+
+    // both even, put the smaller of two first
+    if ( !(l&1) && !(r&1) )
+        return (l-r);
+
+    // l is even, put r first
+    if (!(l&1))
+        return 1;
+
+    // l is odd, put l first
+    return -1;
+}
